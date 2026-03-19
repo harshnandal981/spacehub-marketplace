@@ -1,174 +1,87 @@
-# SpaceHub - Space Rental Marketplace
+# Binance Futures Testnet Trading Bot
 
-> **Modern, Investor-Ready MVP Prototype**
+Professional, modular Python CLI bot for placing Binance Futures Testnet orders. This project is designed for clean architecture, interview discussions, and easy extension into a production-grade bot.
 
-A high-fidelity prototype for a space rental marketplace connecting space seekers with verified hosts. Built with Next.js 14, TypeScript, and Tailwind CSS.
+## Description
 
-![SpaceHub Banner](https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=400&fit=crop)
+This bot uses the python-binance SDK to connect to Binance Futures Testnet and place MARKET or LIMIT orders from the command line.
 
-## 🎯 Project Overview
+It includes:
+- Environment-based API key management using a .env file
+- Input validation for all trading arguments
+- Structured order responses
+- File-based logging for requests, responses, and errors
 
-SpaceHub is an investor-focused MVP prototype demonstrating a scalable platform for listing and booking rentable spaces including:
+## Features
 
-- 🏢 **Workspaces** - Co-working spaces, offices, meeting rooms
-- 🎭 **Event Halls** - Venues for weddings, parties, conferences
-- 🎨 **Studios** - Photography, recording, creative spaces
-- 🏠 **Co-Living** - Shared accommodation for professionals
+- Modular codebase with clear separation of concerns
+- Binance Futures Testnet client wrapper
+- Reusable order placement functions
+- Reusable validators for symbol, side, order type, quantity, and price
+- CLI workflow with friendly success and error output
+- Centralized logging to logs/app.log
 
-## ✨ Features
+## Setup
 
-### For Guests
-- 🔍 Advanced search with filters (price, type, capacity, amenities)
-- 📍 Location-based space discovery
-- ⭐ Ratings and reviews system (UI)
-- 📅 Availability calendar (UI mock)
-- 💳 Secure booking interface
+### 1. Prerequisites
 
-### For Hosts
-- 📝 Multi-step onboarding flow
-- 📊 Dashboard with metrics and analytics
-- 💰 Revenue tracking
-- 📨 Booking request management
-- 📸 Photo gallery management
+- Python 3.x
+- pip
 
-### Design Features
-- 🌓 **Light/Dark Mode** with persistence
-- 📱 **Fully Responsive** design
-- 🎨 **Modern UI** with smooth animations
-- ⚡ **Fast Performance** with Next.js 14
-- 🎯 **Investor-Ready** presentation
+### 2. Install dependencies
 
-## 🛠️ Tech Stack
+~~~bash
+pip install python-binance python-dotenv
+~~~
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **State**: Zustand
-- **Forms**: React Hook Form
-- **Image Carousel**: Embla Carousel
+### 3. Configure environment variables
 
-## 🚀 Getting Started
+Create a file named .env in the project root with the following values:
 
-### Prerequisites
+~~~env
+API_KEY=your_binance_testnet_api_key
+API_SECRET=your_binance_testnet_api_secret
+~~~
 
-- Node.js 18+ installed
-- npm or yarn package manager
+### 4. Run commands
 
-### Installation
+Use the CLI entry point at the project root:
 
-1. **Install dependencies**
-```bash
-npm install
-```
+~~~bash
+python cli.py --help
+~~~
 
-2. **Run development server**
-```bash
-npm run dev
-```
+## Example Commands
 
-3. **Open your browser**
-```
-http://localhost:3000
-```
+### MARKET order
 
-### Build for Production
+~~~bash
+python cli.py --symbol BTCUSDT --side BUY --type MARKET --quantity 0.001
+~~~
 
-```bash
-npm run build
-npm start
-```
+### LIMIT order
 
-## 📁 Project Structure
+~~~bash
+python cli.py --symbol BTCUSDT --side SELL --type LIMIT --quantity 0.001 --price 70000
+~~~
 
-```
-├── app/                    # Next.js app router pages
-│   ├── layout.tsx         # Root layout with theme
-│   ├── page.tsx           # Landing page
-│   ├── spaces/            # Space listing & details
-│   └── host/              # Host dashboard & onboarding
-├── components/
-│   ├── layout/            # Header, Footer
-│   ├── sections/          # Hero, WhyUs, Metrics
-│   ├── ui/                # Reusable UI components
-│   └── providers/         # Theme provider
-├── lib/
-│   ├── data.ts            # Dummy data for spaces
-│   ├── store.ts           # Zustand store (theme)
-│   └── utils.ts           # Utility functions
-├── types/
-│   └── index.ts           # TypeScript interfaces
-└── public/                # Static assets
-```
+## Project Structure
 
-## 🎨 Color Palette
+~~~text
+.
+├── bot/
+│   ├── client.py          # Binance client wrapper for Futures Testnet
+│   ├── orders.py          # Market and limit order functions
+│   ├── validators.py      # Reusable CLI input validations
+│   └── logging_config.py  # Logging setup and API log helpers
+├── cli.py                 # CLI entry point and execution flow
+└── README.md
+~~~
 
-- **Primary**: Indigo/Purple (`#8B5CF6`)
-- **Accent**: Neon Cyan (`#00D9FF`)
-- **Background**: 
-  - Light: `#FFFFFF`
-  - Dark: `#0A0A0F` (true dark)
+## Assumptions
 
-## 📊 Investor Highlights
-
-### Market Opportunity
-- 💰 **$50B+** global flexible space market
-- 📈 **Growing demand** for remote work & event spaces
-- 🌍 **Expanding** to 100+ cities
-
-### Revenue Model
-- 💵 **10-15% commission** per booking
-- 💎 **Premium host subscriptions**
-- ⭐ **Featured listing packages**
-
-### Traction (Mock Data)
-- 📍 500+ active listings
-- 🌆 50+ cities covered
-- 📖 10,000+ bookings completed
-- 💰 ₹2.5 Cr GMV generated
-
-## 🔐 Authentication (UI Only)
-
-Currently displays UI for:
-- Login/Signup modals
-- Social authentication (Google)
-- User roles (Guest/Host)
-
-*Backend integration pending for production*
-
-## 🗺️ Roadmap
-
-### Phase 1 (Current - MVP)
-- ✅ Landing page
-- ✅ Space listings with filters
-- ✅ Space details page
-- ✅ Host dashboard
-- ✅ Light/Dark mode
-
-### Phase 2 (Next)
-- ⏳ Real authentication (Firebase/Auth0)
-- ⏳ Payment integration (Stripe/Razorpay)
-- ⏳ Real-time booking calendar
-- ⏳ Review & rating system
-- ⏳ Host verification
-
-### Phase 3 (Future)
-- ⏳ Mobile app (React Native)
-- ⏳ Advanced analytics
-- ⏳ AI-powered recommendations
-- ⏳ Multi-language support
-
-## 📧 Contact
-
-For investor inquiries:
-- **Email**: invest@spacehub.com
-- **Pitch Deck**: [Download PDF]
-
-## 📄 License
-
-This is a prototype project for demonstration purposes.
-
----
-
-**Built with ❤️ for investors and space enthusiasts**
+- API keys are for Binance Futures Testnet, not mainnet.
+- .env is present in the project root before running commands.
+- Network access to Binance Testnet is available.
+- Quantity and price precision constraints are handled by Binance exchange rules and may require symbol-specific formatting in future enhancements.
+- Current scope focuses on placing orders and clear CLI behavior; advanced risk management and strategy logic are out of scope.
